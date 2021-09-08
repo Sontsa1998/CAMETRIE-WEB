@@ -466,13 +466,12 @@
         </q-img>
       </q-drawer>
 
-      <q-page-container>
-        <q-page padding>
-          <q-spinner-clock class="loadCenter" v-if="loading == true"
+      <q-page-container v-if="response.length == 0">
+        <q-page padding class="loadCenter">
+          <q-spinner-clock v-if="loading == true"
             color="red"
             size="8em"
           />
-          <TableResult v-if="response.length != 0" :response="response" />
           
           <q-page-sticky position="bottom-right" :offset="[18, 18]">
             <q-tooltip content-class="bg-red" anchor="center left" self="center right" :offset="[10, 10]">
@@ -482,6 +481,32 @@
           </q-page-sticky>
         </q-page>
       </q-page-container>
+
+      <q-page-container v-if="loading == false && response.length != 0">
+        <q-page padding >
+          <TableResult :response="response" />
+          <q-page-sticky position="bottom-right" :offset="[18, 18]">
+            <q-fab icon="arrow_upward" direction="up" color="red" >
+              <q-fab-action color="cyan" icon="edit_note">
+                <q-tooltip content-class="bg-red" anchor="center left" self="center right" :offset="[10, 10]">
+                  Modifier la requête
+                </q-tooltip>
+              </q-fab-action>
+              <q-fab-action color="green" icon="save_alt">
+                <q-tooltip content-class="bg-red" anchor="center left" self="center right" :offset="[10, 10]">
+                  Sauvegarder la requête
+                </q-tooltip>
+              </q-fab-action>
+              <q-fab-action color="primary" icon="add">
+                <q-tooltip content-class="bg-primary" anchor="center left" self="center right" :offset="[10, 10]">
+                  Nouvelle requête
+                </q-tooltip>
+              </q-fab-action>
+            </q-fab>
+          </q-page-sticky>
+        </q-page>
+      </q-page-container>
+
     </q-layout>
   </div>
 </template>
@@ -1568,4 +1593,5 @@ export default {
   display: flex
   align-items: center
   justify-content: center
+  height: "100vh"
 </style>
