@@ -497,7 +497,7 @@
                   Sauvegarder la requête
                 </q-tooltip>
               </q-fab-action>
-              <q-fab-action color="primary" icon="add">
+              <q-fab-action clickable @click="fullWidth = true"   color="primary" icon="add">
                 <q-tooltip content-class="bg-primary" anchor="center left" self="center right" :offset="[10, 10]">
                   Nouvelle requête
                 </q-tooltip>

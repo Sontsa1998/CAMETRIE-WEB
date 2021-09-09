@@ -2,63 +2,15 @@
   <div class="q-pa-md">
     <q-table
       title="RESULTATS REQUETES"
-      :rows="data"
       row-key="name"
       binary-state-sort
+      :rows="response"
     >
-      <template v-slot:top-right>
-        <q-btn
-          color="red"
-          icon-right="archive"
-          no-caps
-          @click="exportTable"
-        >
-        <q-tooltip content-class="bg-red" anchor="center left" self="center right" :offset="[10, 10]">
-            Exportez sous Fichier CSV
-        </q-tooltip>
-        </q-btn>
-        &nbsp;
-        <q-btn
-          color="green"
-          icon-right="donut_small"
-          no-caps
-          @click="exportTable"
-        >
-        <q-tooltip content-class="bg-green" anchor="center left" self="center right" :offset="[10, 10]">
-            Visuel graphique
-        </q-tooltip>
-        </q-btn>
-      </template>
-      <template v-slot:body="props">
-        <q-tr :props="props">
-          <q-td key="desc" :props="props">
-            {{ props.row.name }}
-            <q-popup-edit v-model="props.row.name">
-              <q-input v-model="props.row.name" dense autofocus counter />
-            </q-popup-edit>
+      <template>
+        <q-tr v-for="tab1 in response" :key="tab1.INDICATEURS">
+          <q-td>
+            {{ tab1.INDICATEURS }}
           </q-td>
-          <q-td key="calories" :props="props">
-            {{ props.row.calories }}
-            <q-popup-edit v-model="props.row.calories" title="Update calories" buttons>
-              <q-input type="number" v-model="props.row.calories" dense autofocus />
-            </q-popup-edit>
-          </q-td>
-          <q-td key="fat" :props="props">
-            <div class="text-pre-wrap">{{ props.row.fat }}</div>
-            <q-popup-edit v-model="props.row.fat">
-              <q-input type="textarea" v-model="props.row.fat" dense autofocus />
-            </q-popup-edit>
-          </q-td>
-          <q-td key="carbs" :props="props">
-            {{ props.row.carbs }}
-            <q-popup-edit v-model="props.row.carbs" title="Update carbs" buttons persistent>
-              <q-input type="number" v-model="props.row.carbs" dense autofocus hint="Use buttons to close" />
-            </q-popup-edit>
-          </q-td>
-          <q-td key="protein" :props="props">{{ props.row.protein }}</q-td>
-          <q-td key="sodium" :props="props">{{ props.row.sodium }}</q-td>
-          <q-td key="calcium" :props="props">{{ props.row.calcium }}</q-td>
-          <q-td key="iron" :props="props">{{ props.row.iron }}</q-td>
         </q-tr>
       </template>
     </q-table>
